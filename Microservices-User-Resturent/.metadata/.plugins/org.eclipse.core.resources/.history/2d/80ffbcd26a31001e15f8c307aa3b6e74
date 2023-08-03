@@ -1,0 +1,5 @@
+package com.practice.Entity;
+
+public class User {
+
+}

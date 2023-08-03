@@ -1,0 +1,5 @@
+package com.practice.payload;
+
+public class ApiResponse {
+
+}
