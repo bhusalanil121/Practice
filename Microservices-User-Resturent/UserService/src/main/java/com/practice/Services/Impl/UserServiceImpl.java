@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,6 +17,7 @@ import com.practice.Entity.Rating;
 import com.practice.Entity.User;
 import com.practice.Services.UserServices;
 import com.practice.exceptions.ResourceNotFoundException;
+import com.practice.external.services.HotelService;
 import com.practice.repository.UserRepository;
 
 @Service
@@ -28,6 +28,9 @@ public class UserServiceImpl implements UserServices {
 
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private HotelService hotelService;
 
 	private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -66,8 +69,11 @@ public class UserServiceImpl implements UserServices {
 		List<Rating> ratingList = ratings.stream().map(rating -> {
 			
 			//api call to hotel
-			ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
-			Hotel hotel = forEntity.getBody();
+			//ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
+//			Hotel hotel = forEntity.getBody();
+			
+			Hotel hotel = hotelService.getHotel(rating.getHotelId());
+
 			
 			//set the hotel to rating
 			rating.setHotel(hotel);
