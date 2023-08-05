@@ -1,3 +1,7 @@
+spring:
+  application:
+     name: prod
+
 eureka:
   client:
     fetch-registry: true
