@@ -3,3 +3,8 @@ server:
 spring:
   application:
     name: CONFIG-SERVER
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/bhusalanil121/config-files

@@ -25,7 +25,9 @@ public class UserServiceImpl implements UserServices {
 
 	@Autowired
 	private UserRepository userRepo;
-
+	
+	
+	
 	@Autowired
 	private RestTemplate restTemplate;
 	
