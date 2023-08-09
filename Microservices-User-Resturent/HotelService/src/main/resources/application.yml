@@ -29,4 +29,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
       
-    
+okta:
+  oauth2:
+    issuer: https://dev-89582867.okta.com/oauth2/default
+    audience: api://default 
