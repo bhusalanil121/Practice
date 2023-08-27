@@ -1,40 +1,43 @@
 package com.example.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 @Configuration
 public class SpringSecurityConfig {
-	
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-		.withUser("admin")
-		.password("admin")
-		.roles("Admin");
-		
-		
-	}
+
+	// @Bean
+	// public PasswordEncoder passwordEncoder() {
+	// return new BCryptPasswordEncoder();
+	// }
+
+	// protected void configure(AuthenticationManagerBuilder auth) throws Exception
+	// {
+	// PasswordEncoder encoder = passwordEncoder();
+	// String encodedPassword = encoder.encode("admin");
+	// System.out.println("Encoded password: " + encodedPassword);
+
+	// auth.inMemoryAuthentication()
+	// .withUser("admin")
+	// .password(encodedPassword)
+	// .roles("Admin");
+
+	// }
+
 	protected void configure(HttpSecurity http) throws Exception {
-		 http.authorizeRequests()
-         .antMatchers("/api/**").hasRole("Admin") 
-         .anyRequest().authenticated() 
-         .and()
-         .httpBasic();
-		
-		 
-//		 http.csrf().disable()
-//         .authorizeRequests()
-//         .antMatchers("/api/categories/**").permitAll()
-//         .antMatchers("/api/policies/**").permitAll()
-//         .anyRequest().authenticated()
-//         .and()
-//         .httpBasic();
+
+		http.authorizeRequests()
+				.antMatchers("/api/**").hasRole("Admin")
+				.anyRequest().authenticated()
+				.and()
+				.httpBasic();
+
 	}
-	
-	  
-	
 
 }

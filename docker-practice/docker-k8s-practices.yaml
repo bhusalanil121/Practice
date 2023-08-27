@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-k8s-practice-deployment
+  labels:
+    app: docker-k8s-practice
+    
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:  
+      app: docker-k8s-practice
+  template:
+    metadata:
+      labels:
+        app: docker-k8s-practice
+    spec:
+      containers:
+      - name: docker-k8s-practice
+        image: bhusalanil1/dockerpractice
+        ports:
+        - containerPort: 8080
